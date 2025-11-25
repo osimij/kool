@@ -62,8 +62,8 @@ export function Hero() {
         // Determine delay: longer if we just hit a pause point
         const isPausePoint = pausePointsRef.current.has(displayedText.length);
         const delay = isPausePoint 
-          ? 300 + Math.random() * 200  // 300-500ms pause between word groups
-          : 45 + Math.random() * 25;   // 45-70ms per character
+          ? 240 + Math.random() * 160  // 240-400ms pause between word groups
+          : 36 + Math.random() * 20;   // 36-56ms per character
         
         timeoutRef.current = setTimeout(() => {
           setDisplayedText(question.slice(0, displayedText.length + 1));
