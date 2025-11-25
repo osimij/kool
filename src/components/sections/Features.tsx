@@ -240,15 +240,27 @@ function SearchDemoSection({ isInView }: { isInView: boolean }) {
           animate={isInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <h2 className="font-display text-[32px] sm:text-[42px] md:text-[52px] text-[#0c0c0c] leading-[1]">
-            Ask like a human.
-            <br />
-            <span className="text-[#7a7a7a]">Not a search engine.</span>
-          </h2>
-          <p className="text-lg text-[#4a4a4a] leading-relaxed">
-            &ldquo;Where&apos;s the retry logic for auth?&rdquo; beats CTRL+F. 
-            Kool understands intent, not just keywords.
-          </p>
+          <div>
+            <h2 className="font-display text-[24px] sm:text-[28px] md:text-[32px] text-[#0c0c0c] leading-[1.1] mb-3">
+              Ask like a human.
+              <br />
+              <span className="text-[#7a7a7a]">Not a search engine.</span>
+            </h2>
+            <p className="text-base text-[#4a4a4a] leading-relaxed">
+              &ldquo;Where&apos;s the retry logic for auth?&rdquo; beats CTRL+F. 
+              Kool understands intent, not just keywords.
+            </p>
+          </div>
+          <motion.button
+            className="inline-flex items-center gap-2 px-6 py-3 bg-[#0c0c0c] text-white font-medium rounded-full hover:bg-[#1a1a1a] transition-colors w-fit"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            Try natural search
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </motion.button>
         </motion.div>
 
         {/* Visual */}
@@ -443,27 +455,25 @@ const answerExamples = [
     question: "Why was the payment timeout increased?",
     answer: "The payment timeout was increased from 2s to 5s in PR #734 to handle slower 3D Secure flows.",
     sources: ["PR #734", "PAY-291", "#payments-standup"],
-    contributors: ["S", "M", "J"],
     highlight: "PR #734",
   },
   {
     question: "Who owns the auth service?",
     answer: "The auth service is owned by the Platform team. Sarah is the tech lead, and major changes need review from @platform-core.",
     sources: ["TEAM-102", "auth/OWNERS", "#platform-general"],
-    contributors: ["S", "K", "R"],
     highlight: "@platform-core",
   },
   {
     question: "What broke the deploy last Friday?",
     answer: "A misconfigured feature flag in PR #891 caused the checkout flow to fail. Rolled back in PR #892 within 12 minutes.",
     sources: ["PR #891", "PR #892", "#incidents"],
-    contributors: ["A", "M", "T"],
     highlight: "PR #891",
   },
 ];
 
 function AnimatedAnswerCard({ isInView }: { isInView: boolean }) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [cycle, setCycle] = useState(0); // Track cycle count to reset progress bars
   const [phase, setPhase] = useState<"question" | "thinking" | "answer">("question");
   const [displayedAnswer, setDisplayedAnswer] = useState("");
   
@@ -486,7 +496,11 @@ function AnimatedAnswerCard({ isInView }: { isInView: boolean }) {
       
       // Next example after 8s
       const nextTimer = setTimeout(() => {
-        setCurrentIndex((prev) => (prev + 1) % answerExamples.length);
+        setCurrentIndex((prev) => {
+          const next = (prev + 1) % answerExamples.length;
+          if (next === 0) setCycle((c) => c + 1); // New cycle, reset progress bars
+          return next;
+        });
       }, 8000);
       
       return () => {
@@ -520,15 +534,21 @@ function AnimatedAnswerCard({ isInView }: { isInView: boolean }) {
   }, [phase, current.answer, isInView]);
 
   return (
-    <div className="p-6 rounded-xl bg-[#0c0c0c] text-white mt-auto overflow-hidden">
+    <motion.div 
+      layout
+      transition={{ layout: { type: "spring", stiffness: 300, damping: 25 } }}
+      className="p-6 rounded-xl bg-[#0c0c0c] text-white mt-auto overflow-hidden"
+    >
       {/* Question */}
       <AnimatePresence mode="wait">
         <motion.div
           key={`question-${currentIndex}`}
+          layout="position"
           className="flex items-center gap-2 mb-4 pb-3 border-b border-white/10"
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
+          initial={{ opacity: 0, y: -6, filter: "blur(4px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          exit={{ opacity: 0, y: -6, filter: "blur(4px)" }}
+          transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
         >
           <div className="w-6 h-6 rounded-full bg-[#0077ED] flex items-center justify-center flex-shrink-0">
             <span className="text-xs font-bold">?</span>
@@ -538,14 +558,16 @@ function AnimatedAnswerCard({ isInView }: { isInView: boolean }) {
       </AnimatePresence>
 
       {/* Answer area */}
-      <div className="min-h-[80px]">
+      <motion.div layout="position" className="min-h-[80px]">
         <AnimatePresence mode="wait">
           {phase === "thinking" && (
             <motion.div
+              layout="position"
               className="flex items-center gap-3"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+              initial={{ opacity: 0, filter: "blur(4px)" }}
+              animate={{ opacity: 1, filter: "blur(0px)" }}
+              exit={{ opacity: 0, filter: "blur(4px)" }}
+              transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
             >
               <KoolLogoMotion size={24} color="#0077ED" />
               <span className="text-sm text-white/40">Searching 47,832 items...</span>
@@ -554,11 +576,13 @@ function AnimatedAnswerCard({ isInView }: { isInView: boolean }) {
 
           {phase === "answer" && (
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              layout="position"
+              initial={{ opacity: 0, filter: "blur(3px)" }}
+              animate={{ opacity: 1, filter: "blur(0px)" }}
+              transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
               className="space-y-4"
             >
-              <p className="text-white/90 leading-relaxed text-sm">
+              <motion.p layout="position" className="text-white/90 leading-relaxed text-sm">
                 {displayedAnswer.split(current.highlight).map((part, i, arr) => (
                   <span key={i}>
                     {part}
@@ -571,27 +595,28 @@ function AnimatedAnswerCard({ isInView }: { isInView: boolean }) {
                   <motion.span
                     className="inline-block w-0.5 h-4 bg-white/60 ml-0.5 align-middle"
                     animate={{ opacity: [1, 0] }}
-                    transition={{ duration: 0.4, repeat: Infinity }}
+                    transition={{ duration: 0.4, repeat: Infinity, ease: "easeInOut" }}
                   />
                 )}
-              </p>
+              </motion.p>
               
               {/* Sources - appear after answer */}
               {displayedAnswer.length === current.answer.length && (
                 <motion.div
+                  layout="position"
                   className="flex items-center gap-2 flex-wrap"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
+                  initial={{ opacity: 0, y: 6, filter: "blur(3px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  transition={{ delay: 0.15, duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
                 >
                   <span className="text-xs text-white/40">Sources:</span>
                   {current.sources.map((source, i) => (
                     <motion.span
                       key={source}
                       className="text-xs px-2 py-1 rounded bg-white/10 text-white/70 cursor-pointer hover:text-white hover:bg-white/20 transition-colors"
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.3 + i * 0.1 }}
+                      initial={{ opacity: 0, filter: "blur(2px)" }}
+                      animate={{ opacity: 1, filter: "blur(0px)" }}
+                      transition={{ delay: 0.25 + i * 0.08, duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
                     >
                       {source}
                     </motion.span>
@@ -599,47 +624,30 @@ function AnimatedAnswerCard({ isInView }: { isInView: boolean }) {
                 </motion.div>
               )}
 
-              {/* Contributors */}
-              {displayedAnswer.length === current.answer.length && (
-                <motion.div
-                  className="pt-3 border-t border-white/10"
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.6, duration: 0.4, ease: "easeOut" }}
-                >
-                  <div className="flex items-center gap-2">
-                    <div className="flex -space-x-2">
-                      {current.contributors.map((initial, i) => (
-                        <div
-                          key={i}
-                          className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center text-xs border-2 border-[#0c0c0c]"
-                        >
-                          {initial}
-                        </div>
-                      ))}
-                    </div>
-                    <span className="text-xs text-white/50">{current.contributors.length} team members referenced this</span>
-                  </div>
-                </motion.div>
-              )}
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
+      </motion.div>
 
       {/* Progress indicator */}
-      <div className="flex gap-1.5 mt-4 pt-3 border-t border-white/5">
+      <motion.div layout="position" className="flex gap-1.5 mt-4 pt-3 border-t border-white/5">
         {answerExamples.map((_, i) => (
-          <motion.div
-            key={i}
-            className={`h-1 rounded-full flex-1 ${i === currentIndex ? "bg-[#0077ED]" : "bg-white/10"}`}
-            animate={i === currentIndex ? { scaleX: [0, 1] } : {}}
-            transition={{ duration: 8, ease: "linear" }}
-            style={{ transformOrigin: "left" }}
-          />
+          <div key={i} className="relative flex-1 h-1">
+            {/* Background track */}
+            <div className={`absolute inset-0 rounded-full ${i === currentIndex ? "bg-[#0077ED]/20" : "bg-white/10"}`} />
+            {/* Progress fill */}
+            <motion.div
+              key={`${i}-${cycle}`}
+              className="absolute inset-0 rounded-full bg-[#0077ED]"
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: i === currentIndex ? 1 : i < currentIndex ? 1 : 0 }}
+              transition={{ duration: i === currentIndex ? 8 : 0.3, ease: i === currentIndex ? "linear" : "easeOut" }}
+              style={{ transformOrigin: "left" }}
+            />
+          </div>
         ))}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 
