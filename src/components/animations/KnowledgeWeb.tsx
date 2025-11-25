@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 interface Node {
@@ -36,7 +36,7 @@ const connections: Connection[] = [
   { from: "linear", to: "brain" },
 ];
 
-const icons: Record<string, JSX.Element> = {
+const icons: Record<string, React.ReactElement> = {
   code: (
     <path
       strokeLinecap="round"
