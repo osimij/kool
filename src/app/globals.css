@@ -1,26 +1,286 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* PP Mori Font Family */
+@font-face {
+  font-family: 'PP Mori';
+  src: url('/PPMori/PPMori-Regular.8f65835a.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@font-face {
+  font-family: 'PP Mori';
+  src: url('/PPMori/PPMori-SemiBold.cb07cb68.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@theme {
+  /* Rich, warm palette */
+  --color-bg-primary: #faf9f7;
+  --color-bg-cream: #f7f5f0;
+  --color-bg-warm: #f0ebe3;
+  --color-bg-dark: #0c0c0c;
+  --color-bg-charcoal: #1a1a1a;
+  
+  --color-text-primary: #0c0c0c;
+  --color-text-secondary: #4a4a4a;
+  --color-text-muted: #7a7a7a;
+  --color-text-inverse: #faf9f7;
+  
+  /* Primary accent - blue */
+  --color-accent: #0077ED;
+  --color-accent-light: #3399FF;
+  --color-accent-dark: #0066CC;
+  
+  /* Secondary warm tones */
+  --color-peach: #ffb199;
+  --color-salmon: #ff9a85;
+  --color-amber: #f5a623;
+  
+  /* Rich purples and blues for variety */
+  --color-purple: #8b5cf6;
+  --color-indigo: #6366f1;
+  --color-teal: #14b8a6;
+  --color-emerald: #34d399;
+  
+  --color-border: rgba(0, 0, 0, 0.08);
+  --color-border-strong: rgba(0, 0, 0, 0.12);
+  
+  --font-display: 'PP Mori', system-ui, sans-serif;
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #faf9f7;
+  color: #0c0c0c;
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+}
+
+::selection {
+  background: #0077ED;
+  color: #ffffff;
+}
+
+/* PP Mori display font */
+.font-display {
+  font-family: 'PP Mori', system-ui, sans-serif;
+  font-weight: 400;
+}
+
+.font-display-semibold {
+  font-family: 'PP Mori', system-ui, sans-serif;
+  font-weight: 600;
+}
+
+/* Rich gradient backgrounds */
+.gradient-hero {
+  background: linear-gradient(135deg, 
+    #2d5a4a 0%, 
+    #4a7c59 25%, 
+    #7a9e7a 50%,
+    #d4956a 75%,
+    #e07850 100%
+  );
+}
+
+.gradient-accent {
+  background: linear-gradient(180deg, 
+    #3399FF 0%, 
+    #0077ED 100%
+  );
+}
+
+.gradient-purple-silk {
+  background: linear-gradient(135deg, 
+    #c4b5fd 0%, 
+    #a78bfa 50%, 
+    #8b5cf6 100%
+  );
+}
+
+.gradient-teal-silk {
+  background: linear-gradient(135deg, 
+    #5eead4 0%, 
+    #2dd4bf 50%, 
+    #14b8a6 100%
+  );
+}
+
+/* Noise texture overlay */
+.noise-texture {
+  position: relative;
+}
+.noise-texture::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* Silk wave animation */
+@keyframes silk-wave {
+  0%, 100% { transform: translateY(0) scaleY(1); }
+  50% { transform: translateY(-15px) scaleY(1.02); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float 6s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+.animate-float-slow {
+  animation: float 8s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+/* Glass morphism */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.glass-dark {
+  background: rgba(12, 12, 12, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Rich shadows */
+.shadow-soft {
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.08);
+}
+
+.shadow-medium {
+  box-shadow: 0 8px 40px -8px rgba(0, 0, 0, 0.12);
+}
+
+.shadow-elevated {
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(0, 0, 0, 0.02);
+}
+
+.shadow-glow-accent {
+  box-shadow: 0 20px 60px -15px rgba(0, 119, 237, 0.4);
+}
+
+.shadow-glow-purple {
+  box-shadow: 0 20px 60px -15px rgba(139, 92, 246, 0.4);
+}
+
+/* Blob shapes */
+.blob {
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+}
+
+.blob-2 {
+  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+:focus-visible {
+  outline: 2px solid #0077ED;
+  outline-offset: 2px;
+}
+
+/* Marquee */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+/* Kool Logo Spiral Animation */
+@keyframes koolSpiralTrim {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dashoffset: 800;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.kool-spiral-animated {
+  stroke-dasharray: 800;
+  stroke-dashoffset: 0;
+  animation: koolSpiralTrim 2s ease-in-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
