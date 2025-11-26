@@ -99,7 +99,7 @@ function MarqueeRow({ items, direction = "left", duration = 45 }: { items: strin
         {duplicatedItems.map((text, i) => (
           <span
             key={i}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/[0.06] dark:bg-white/[0.08] border border-black/[0.08] dark:border-white/[0.06] text-[13px] text-black/70 dark:text-white/70 shrink-0"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/[0.03] dark:bg-white/[0.05] border border-black/[0.05] dark:border-white/[0.04] text-[13px] text-black/70 dark:text-white/70 shrink-0"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-[#3B82F6] dark:bg-[#0077ED]" />
             {text}
