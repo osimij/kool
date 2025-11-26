@@ -14,8 +14,8 @@ interface ButtonProps extends Omit<HTMLMotionProps<"button">, "ref"> {
 
 const variants: Record<ButtonVariant, string> = {
   primary: `
-    bg-[#0c0c0c] text-white font-medium
-    hover:bg-[#1a1a1a]
+    bg-[#0c0c0c] dark:bg-white text-white dark:text-[#0c0c0c] font-medium
+    hover:bg-[#1a1a1a] dark:hover:bg-[#e8e8e8]
     shadow-[0_1px_2px_rgba(0,0,0,0.1),0_4px_12px_rgba(0,0,0,0.1)]
     hover:shadow-[0_4px_20px_rgba(0,0,0,0.15)]
   `,
@@ -24,19 +24,19 @@ const variants: Record<ButtonVariant, string> = {
     hover:bg-[#0066CC]
   `,
   secondary: `
-    bg-white text-[#0c0c0c]
-    border border-[#0c0c0c]/10
-    hover:bg-[#f7f5f0] hover:border-[#0c0c0c]/15
+    bg-white dark:bg-[#1a1a1a] text-[#0c0c0c] dark:text-white
+    border border-[#0c0c0c]/10 dark:border-white/10
+    hover:bg-[#f7f5f0] dark:hover:bg-[#2a2a2a] hover:border-[#0c0c0c]/15 dark:hover:border-white/15
     shadow-soft
   `,
   outline: `
-    bg-transparent text-[#0c0c0c]
-    border-2 border-[#0c0c0c]/15
-    hover:bg-[#0c0c0c]/5 hover:border-[#0c0c0c]/25
+    bg-transparent text-[#0c0c0c] dark:text-white
+    border-2 border-[#0c0c0c]/15 dark:border-white/15
+    hover:bg-[#0c0c0c]/5 dark:hover:bg-white/5 hover:border-[#0c0c0c]/25 dark:hover:border-white/25
   `,
   ghost: `
-    bg-transparent text-[#4a4a4a]
-    hover:text-[#0c0c0c] hover:bg-[#0c0c0c]/5
+    bg-transparent text-[#4a4a4a] dark:text-[#b0b0b0]
+    hover:text-[#0c0c0c] dark:hover:text-white hover:bg-[#0c0c0c]/5 dark:hover:bg-white/5
   `,
 };
 
