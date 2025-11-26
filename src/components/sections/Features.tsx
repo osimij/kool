@@ -235,7 +235,7 @@ function SearchDemoSection({ isInView }: { isInView: boolean }) {
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-12 lg:gap-16">
         {/* Text */}
         <motion.div
-          className="lg:max-w-md flex flex-col justify-between lg:self-stretch lg:min-h-[420px]"
+          className="lg:max-w-md flex flex-col justify-between lg:self-stretch lg:min-h-[420px] pt-2.5"
           initial={{ opacity: 0, x: -40 }}
           animate={isInView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -247,7 +247,8 @@ function SearchDemoSection({ isInView }: { isInView: boolean }) {
               <span className="text-[#7a7a7a]">Not a search engine.</span>
             </h2>
             <p className="text-base text-[#4a4a4a] leading-relaxed">
-              &ldquo;Where&apos;s the retry logic for auth?&rdquo; beats CTRL+F. 
+              &ldquo;Where&apos;s the retry logic for auth?&rdquo; beats CTRL+F.
+              <br />
               Kool understands intent, not just keywords.
             </p>
           </div>
@@ -658,7 +659,21 @@ export function Features() {
 
   return (
     <section className="py-24 relative bg-[#faf9f7] overflow-hidden" ref={ref}>
-      <Container className="space-y-6">
+      <Container className="space-y-12">
+        {/* Section header */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5 }}
+        >
+          <h2 className="font-display text-[32px] sm:text-[40px] md:text-[48px] text-[#0c0c0c] leading-[1.1] mb-4">
+            Your team knows a lot. <span className="text-[#7a7a7a]">You just can't find it.</span>
+          </h2>
+          <p className="text-lg text-[#4a4a4a] leading-relaxed">
+            The answer exists somewhere—buried in a PR, a Notion page, a Slack thread from three months ago. Kool brings it all together.
+          </p>
+        </motion.div>
+
         {/* Features 1 & 3: Side by side cards */}
         <div className="grid md:grid-cols-2 gap-6">
           {/* Card 1: Reads everything */}

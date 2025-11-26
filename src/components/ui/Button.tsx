@@ -16,8 +16,6 @@ const variants: Record<ButtonVariant, string> = {
   primary: `
     bg-[#0c0c0c] dark:bg-white text-white dark:text-[#0c0c0c] font-medium
     hover:bg-[#1a1a1a] dark:hover:bg-[#e8e8e8]
-    shadow-[0_1px_2px_rgba(0,0,0,0.1),0_4px_12px_rgba(0,0,0,0.1)]
-    hover:shadow-[0_4px_20px_rgba(0,0,0,0.15)]
   `,
   gradient: `
     bg-[#0077ED] text-white font-medium
@@ -27,7 +25,6 @@ const variants: Record<ButtonVariant, string> = {
     bg-white dark:bg-[#1a1a1a] text-[#0c0c0c] dark:text-white
     border border-[#0c0c0c]/10 dark:border-white/10
     hover:bg-[#f7f5f0] dark:hover:bg-[#2a2a2a] hover:border-[#0c0c0c]/15 dark:hover:border-white/15
-    shadow-soft
   `,
   outline: `
     bg-transparent text-[#0c0c0c] dark:text-white

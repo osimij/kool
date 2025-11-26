@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button, Container, KoolLogo } from "@/components/ui";
+import { useIntro } from "@/components/animations/IntroAnimation";
 
 const navLinks = [
   { label: "Product", href: "#product" },
@@ -11,9 +12,12 @@ const navLinks = [
 ];
 
 export function Navigation() {
+  const { showContent, phase } = useIntro();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isDark, setIsDark] = useState(false);
+  
+  const isVisible = showContent || phase === "done";
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 100);
@@ -55,9 +59,12 @@ export function Navigation() {
             : "bg-transparent"
           }
         `}
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ 
+          y: isVisible ? 0 : -20, 
+          opacity: isVisible ? 1 : 0 
+        }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       >
         <Container>
           <nav className="flex items-center justify-between h-16">

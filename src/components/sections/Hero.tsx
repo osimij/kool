@@ -1,8 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Container } from "@/components/ui";
+import { useIntro } from "@/components/animations/IntroAnimation";
 
 const questions = [
   "Why are we seeing 500 errors on checkout?",
@@ -40,14 +41,23 @@ const generatePausePoints = (text: string): Set<number> => {
   return pausePoints;
 };
 
-type Phase = "typing" | "selecting" | "selected";
+type Phase = "intro-cursor" | "intro-typing" | "typing" | "selecting" | "selected";
 
 export function Hero() {
+  const { phase: introPhase } = useIntro();
   const [questionIndex, setQuestionIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState("");
-  const [phase, setPhase] = useState<Phase>("typing");
+  const [phase, setPhase] = useState<Phase>("intro-cursor");
+  const [introComplete, setIntroComplete] = useState(false);
   const pausePointsRef = useRef<Set<number>>(new Set());
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Sync with intro animation phase
+  useEffect(() => {
+    if (introPhase === "typing" && phase === "intro-cursor") {
+      setPhase("intro-typing");
+    }
+  }, [introPhase, phase]);
 
   // Generate new pause points when question changes
   useEffect(() => {
@@ -57,13 +67,17 @@ export function Hero() {
   useEffect(() => {
     const question = questions[questionIndex];
     
-    if (phase === "typing") {
+    if (phase === "intro-cursor") {
+      // Just show blinking cursor, wait for intro phase change
+      return;
+    }
+    
+    if (phase === "intro-typing") {
       if (displayedText.length < question.length) {
-        // Determine delay: longer if we just hit a pause point
         const isPausePoint = pausePointsRef.current.has(displayedText.length);
         const delay = isPausePoint 
-          ? 240 + Math.random() * 160  // 240-400ms pause between word groups
-          : 36 + Math.random() * 20;   // 36-56ms per character
+          ? 180 + Math.random() * 120
+          : 45 + Math.random() * 25;
         
         timeoutRef.current = setTimeout(() => {
           setDisplayedText(question.slice(0, displayedText.length + 1));
@@ -73,16 +87,42 @@ export function Hero() {
           if (timeoutRef.current) clearTimeout(timeoutRef.current);
         };
       } else {
-        // Done typing, pause before selecting
+        // Done with intro typing, trigger reveal
+        const timeout = setTimeout(() => {
+          if (typeof window !== "undefined") {
+            const setIntroPhase = (window as Window & { __introSetPhase?: (phase: "cursor" | "typing" | "revealing" | "done") => void }).__introSetPhase;
+            if (setIntroPhase) setIntroPhase("revealing");
+          }
+          setIntroComplete(true);
+          // Wait for reveal animation to complete (800ms) plus a pause, then start selection
+          setTimeout(() => setPhase("selecting"), 1200);
+        }, 400);
+        return () => clearTimeout(timeout);
+      }
+    }
+    
+    if (phase === "typing") {
+      if (displayedText.length < question.length) {
+        const isPausePoint = pausePointsRef.current.has(displayedText.length);
+        const delay = isPausePoint 
+          ? 240 + Math.random() * 160
+          : 36 + Math.random() * 20;
+        
+        timeoutRef.current = setTimeout(() => {
+          setDisplayedText(question.slice(0, displayedText.length + 1));
+        }, delay);
+        
+        return () => {
+          if (timeoutRef.current) clearTimeout(timeoutRef.current);
+        };
+      } else {
         const timeout = setTimeout(() => setPhase("selecting"), 800);
         return () => clearTimeout(timeout);
       }
     } else if (phase === "selecting") {
-      // Show selection highlight
       const timeout = setTimeout(() => setPhase("selected"), 500);
       return () => clearTimeout(timeout);
     } else if (phase === "selected") {
-      // Clear text and move to next question
       const timeout = setTimeout(() => {
         setDisplayedText("");
         setQuestionIndex((prev) => (prev + 1) % questions.length);
@@ -90,12 +130,20 @@ export function Hero() {
       }, 80);
       return () => clearTimeout(timeout);
     }
-  }, [displayedText, phase, questionIndex]);
+  }, [displayedText, phase, questionIndex, introComplete]);
+
+  const isIntroPhase = phase === "intro-cursor" || phase === "intro-typing";
+  const showCursor = phase === "intro-cursor" || phase === "intro-typing" || phase === "typing";
 
   return (
-    <section className="relative bg-[#faf9f7] dark:bg-[#0c0c0c] overflow-hidden pt-32 pb-24">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0077ED]/10 dark:from-[#0077ED]/5 via-transparent to-transparent" />
+    <section className="relative overflow-hidden pt-32 pb-24 bg-[#faf9f7] dark:bg-[#0c0c0c]">
+      {/* Background gradient - fades in with reveal */}
+      <motion.div 
+        className="absolute inset-0 bg-gradient-to-b from-transparent dark:from-[#0077ED]/5 via-transparent to-transparent"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isIntroPhase ? 0 : 1 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      />
       
       <Container className="relative z-10">
         {/* Title + Subtitle + CTA */}
@@ -103,19 +151,15 @@ export function Hero() {
           {/* Title animation */}
           <motion.div
             className="mb-6 relative"
-            initial={{ opacity: 0 }}
+            initial={{ opacity: 1 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
           >
             <div className="font-display text-[2.5rem] sm:text-[3.5rem] md:text-[4.5rem] lg:text-[5rem] leading-[1.05] tracking-[-0.02em] invisible" aria-hidden="true">
-              <span>&ldquo;</span>
               <span>{longestQuestion}</span>
               <span className="inline-block w-[3px] h-[1em] ml-1" />
-              <span>&rdquo;</span>
             </div>
             
-            <div className="font-display text-[2.5rem] sm:text-[3.5rem] md:text-[4.5rem] lg:text-[5rem] text-[#0c0c0c] dark:text-white leading-[1.05] tracking-[-0.02em] absolute inset-0">
-              <span className="text-[#0c0c0c]/40 dark:text-white/40">&ldquo;</span>
+            <div className="font-display text-[2.5rem] sm:text-[3.5rem] md:text-[4.5rem] lg:text-[5rem] leading-[1.05] tracking-[-0.02em] absolute inset-0 text-[#0c0c0c] dark:text-white">
               <span 
                 className={`transition-colors duration-100 ${
                   phase === "selecting" || phase === "selected" 
@@ -125,23 +169,22 @@ export function Hero() {
               >
                 {displayedText}
               </span>
-              {phase === "typing" && (
+              {showCursor && (
                 <motion.span 
                   className="inline-block w-[3px] h-[1em] bg-[#0077ED] ml-1 align-middle"
                   animate={{ opacity: [1, 0] }}
-                  transition={{ duration: 0.8, repeat: Infinity }}
+                  transition={{ duration: 0.53, repeat: Infinity, repeatType: "reverse" }}
                 />
               )}
-              <span className="text-[#0c0c0c]/40 dark:text-white/40">&rdquo;</span>
             </div>
           </motion.div>
 
-          {/* CTA + Subtitle row */}
+          {/* CTA + Subtitle row - hidden during intro */}
           <motion.div
             className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-8"
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
+            animate={{ opacity: isIntroPhase ? 0 : 1, y: isIntroPhase ? 20 : 0 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
           >
             <motion.a
               href="#"
@@ -169,10 +212,10 @@ export function Hero() {
           </motion.div>
         </div>
 
-        {/* Kool Interface - Multi-panel layout */}
+        {/* Kool Interface - Multi-panel layout - hidden during intro */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={{ opacity: isIntroPhase ? 0 : 1, y: isIntroPhase ? 40 : 0 }}
           transition={{ delay: 0.5, duration: 0.8 }}
         >
           <div className="rounded-2xl lg:rounded-3xl bg-white dark:bg-[#0a0a0a] border border-black/[0.08] dark:border-white/[0.08] overflow-hidden shadow-2xl shadow-black/20 dark:shadow-black/50">
