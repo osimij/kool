@@ -840,6 +840,7 @@ function transformValue(input: number, inputRange: number[], outputRange: number
 
 /**
  * Custom hook to check if an element is in the viewport
+ * Triggers when the middle of the viewport reaches the element
  */
 function useIsInView(ref: React.RefObject<HTMLElement>) {
   const [isInView, setIsInView] = useState(false);
@@ -851,7 +852,12 @@ function useIsInView(ref: React.RefObject<HTMLElement>) {
       ([entry]) => {
         setIsInView(entry.isIntersecting);
       },
-      { threshold: 0, rootMargin: '50px' }
+      { 
+        threshold: 0, 
+        // Trigger when element crosses the middle of viewport
+        // Bottom 50% of viewport excluded = triggers when element is in top half
+        rootMargin: '0px 0px -50% 0px' 
+      }
     );
     
     observer.observe(ref.current);

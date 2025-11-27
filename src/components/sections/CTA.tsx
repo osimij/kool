@@ -20,7 +20,7 @@ export function CTA() {
           {/* Title + Subtitle group */}
           <div className="mb-6 sm:mb-8">
             <h2 className="font-display text-2xl sm:text-3xl md:text-5xl lg:text-6xl text-[#0c0c0c] leading-[1.1] tracking-tight mb-2 sm:mb-3">
-              Seriously, just try it.
+              Just try it, seriously.
             </h2>
             
             <motion.p 

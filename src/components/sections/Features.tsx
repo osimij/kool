@@ -645,7 +645,8 @@ function AnimatedAnswerCard({ isInView }: { isInView: boolean }) {
 
 export function Features() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  // Trigger when viewport middle reaches the section (50% from bottom)
+  const isInView = useInView(ref, { once: true, margin: "0px 0px -50% 0px" });
   const [activeSource, setActiveSource] = useState(0);
 
   return (

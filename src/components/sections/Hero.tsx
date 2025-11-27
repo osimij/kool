@@ -6,9 +6,9 @@ import { Container } from "@/components/ui";
 import { INTRO_TIMING, REVEAL_DELAY, REVEAL_DURATION } from "@/components/animations/IntroAnimation";
 
 const questions = [
-  "Why are we seeing 500 errors on checkout?",
-  "Where's the retry logic for auth?",
   "Who changed the payment timeout last week?",
+  "Where's the retry logic for auth?",
+  "Why are we seeing 500 errors on checkout?",
   "How does our rate limiter work?",
 ];
 
