@@ -9,43 +9,45 @@ export function CTA() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="relative bg-[#faf9f7] pt-32 pb-0 overflow-hidden" id="pricing" ref={ref}>
-      <Container>
+    <section className="relative bg-[#faf9f7] min-h-[320px] sm:min-h-[380px] md:min-h-[460px] flex items-center justify-center overflow-hidden py-16 sm:py-20 md:py-24" id="pricing" ref={ref}>
+      <Container className="flex items-center justify-center">
         <motion.div
-          className="text-center max-w-3xl mx-auto mb-20"
-          initial={{ opacity: 0, y: 30 }}
+          className="text-center max-w-4xl mx-auto px-4"
+          initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
-          <h2 className="font-display text-4xl sm:text-5xl md:text-6xl text-[#0c0c0c] leading-[1.05] mb-6">
-            Ready to transform your
-            <br />
-            engineering workflow?
-          </h2>
-          <p className="text-lg text-[#4a4a4a] mb-10">
-            Free to start. Connect your first repo and see what Kool finds.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button size="lg">
-              Request a demo
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Button>
-            <Button variant="secondary" size="lg">
-              Explore products
-            </Button>
+          {/* Title + Subtitle group */}
+          <div className="mb-6 sm:mb-8">
+            <h2 className="font-display text-2xl sm:text-3xl md:text-5xl lg:text-6xl text-[#0c0c0c] leading-[1.1] tracking-tight mb-2 sm:mb-3">
+              Seriously, just try it.
+            </h2>
+            
+            <motion.p 
+              className="text-sm sm:text-base md:text-lg lg:text-xl text-[#5a5a5a] max-w-2xl mx-auto leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.15, duration: 0.6 }}
+            >
+              Takes 2 minutes to set up. You&apos;ll wonder how you shipped without it.
+            </motion.p>
           </div>
+          
+          <motion.div 
+            className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.25, duration: 0.6 }}
+          >
+            <Button size="md" className="w-full sm:w-auto">
+              Start Free Trial
+            </Button>
+            <Button variant="secondary" size="md" className="w-full sm:w-auto">
+              Book a Demo
+            </Button>
+          </motion.div>
         </motion.div>
       </Container>
-
-      {/* Ocean depth gradient transition to footer */}
-      <div 
-        className="h-[400px] mt-12"
-        style={{
-          background: "linear-gradient(to bottom, #faf9f7 0%, #76B3E4 25%, #385EAC 50%, #00194C 75%, #000000 100%)"
-        }}
-      />
     </section>
   );
 }

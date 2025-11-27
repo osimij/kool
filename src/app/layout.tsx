@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DM_Sans, JetBrains_Mono } from "next/font/google";
+import { DM_Sans, JetBrains_Mono, Crimson_Pro } from "next/font/google";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -13,6 +13,14 @@ const jetbrains = JetBrains_Mono({
   variable: "--font-mono",
   subsets: ["latin"],
   display: "swap",
+});
+
+const crimsonPro = Crimson_Pro({
+  variable: "--font-serif",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
@@ -33,7 +41,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${dmSans.variable} ${jetbrains.variable}`}>
+      <body className={`${dmSans.variable} ${jetbrains.variable} ${crimsonPro.variable}`}>
         {children}
       </body>
     </html>

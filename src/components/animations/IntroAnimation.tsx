@@ -1,77 +1,23 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect } from "react";
-import { motion } from "framer-motion";
+// Simple timing constants - no context, no state management
+// All components just use these delays for their animations
 
-interface IntroContextType {
-  phase: "cursor" | "typing" | "revealing" | "done";
-  showContent: boolean;
-}
+export const INTRO_TIMING = {
+  // How long the cursor blinks before typing starts
+  CURSOR_DURATION: 1.5,
+  // Approximate time for typing the first question (~45 chars at ~55ms avg)
+  TYPING_DURATION: 2.5,
+  // Pause after typing completes before other elements appear
+  POST_TYPING_PAUSE: 1.0,
+  // Duration for reveal animations (slower, more elegant)
+  REVEAL_DURATION: 1.8,
+  // Total intro duration - when other elements should start appearing
+  get REVEAL_DELAY() {
+    return this.CURSOR_DURATION + this.TYPING_DURATION + this.POST_TYPING_PAUSE;
+  },
+} as const;
 
-const IntroContext = createContext<IntroContextType>({
-  phase: "cursor",
-  showContent: false,
-});
-
-export const useIntro = () => useContext(IntroContext);
-
-interface IntroAnimationProps {
-  children: React.ReactNode;
-}
-
-export function IntroAnimation({ children }: IntroAnimationProps) {
-  const [phase, setPhase] = useState<"cursor" | "typing" | "revealing" | "done">("cursor");
-  const [showContent, setShowContent] = useState(false);
-
-  useEffect(() => {
-    // Phase 1: Flickering cursor for 1.5 seconds
-    const cursorTimer = setTimeout(() => {
-      setPhase("typing");
-    }, 1500);
-
-    return () => clearTimeout(cursorTimer);
-  }, []);
-
-  useEffect(() => {
-    if (phase === "revealing") {
-      setShowContent(true);
-      const doneTimer = setTimeout(() => {
-        setPhase("done");
-      }, 800);
-      return () => clearTimeout(doneTimer);
-    }
-  }, [phase]);
-
-  // Expose setPhase for Hero to call when typing is done
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      (window as Window & { __introSetPhase?: (phase: "cursor" | "typing" | "revealing" | "done") => void }).__introSetPhase = setPhase;
-    }
-  }, []);
-
-  return (
-    <IntroContext.Provider value={{ phase, showContent }}>
-      {children}
-    </IntroContext.Provider>
-  );
-}
-
-// Wrapper for content that should be hidden during intro
-export function IntroReveal({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  const { showContent, phase } = useIntro();
-  
-  if (phase === "done") {
-    return <>{children}</>;
-  }
-
-  return (
-    <motion.div
-      className={className}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: showContent ? 1 : 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-    >
-      {children}
-    </motion.div>
-  );
-}
+// For convenience - the delay and duration other components should use
+export const REVEAL_DELAY = INTRO_TIMING.REVEAL_DELAY; // ~4.5s
+export const REVEAL_DURATION = INTRO_TIMING.REVEAL_DURATION; // 1.0s

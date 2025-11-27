@@ -15,6 +15,7 @@ interface ButtonProps extends Omit<HTMLMotionProps<"button">, "ref"> {
 const variants: Record<ButtonVariant, string> = {
   primary: `
     bg-[#0c0c0c] dark:bg-white text-white dark:text-[#0c0c0c] font-medium
+    border border-[#2a2a2a] dark:border-[#e0e0e0]
     hover:bg-[#1a1a1a] dark:hover:bg-[#e8e8e8]
   `,
   gradient: `
@@ -38,9 +39,9 @@ const variants: Record<ButtonVariant, string> = {
 };
 
 const sizes: Record<ButtonSize, string> = {
-  sm: "h-10 px-5 text-sm gap-2 rounded-full",
-  md: "h-12 px-6 text-sm gap-2 rounded-full",
-  lg: "h-14 px-8 text-base gap-2.5 rounded-full",
+  sm: "h-10 px-4 text-sm gap-2 rounded-full pt-px",
+  md: "h-12 px-6 text-sm gap-2 rounded-full pt-0.5",
+  lg: "h-14 px-8 text-base gap-2.5 rounded-full pt-0.5",
 };
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -50,7 +51,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         className={`
           inline-flex items-center justify-center
-          font-medium tracking-[-0.01em]
+          font-medium tracking-[-0.01em] leading-none
           transition-all duration-200 ease-out
           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0077ED] focus-visible:ring-offset-2
           disabled:opacity-50 disabled:pointer-events-none

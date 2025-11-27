@@ -2,37 +2,29 @@
 
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-import { Container } from "@/components/ui";
+import { Container, VaporizeTextCycle, Tag } from "@/components/ui";
 import { KoolLogoMotion } from "@/components/ui/KoolLogo";
 
 const GitHubIcon = () => (
-  <svg viewBox="0 0 24 24" className="w-6 h-6" fill="currentColor">
+  <svg viewBox="0 0 24 24" className="w-full h-full" fill="currentColor">
     <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
   </svg>
 );
 
 const NotionIcon = () => (
-  <svg viewBox="0 0 24 24" className="w-6 h-6" fill="currentColor">
-    <path d="M4.459 4.208c.746.606 1.026.56 2.428.466l13.215-.793c.28 0 .047-.28-.046-.326L17.86 1.968c-.42-.326-.98-.7-2.055-.607L3.01 2.295c-.466.046-.56.28-.374.466zm.793 3.08v13.906c0 .747.373 1.027 1.214.98l14.523-.84c.84-.046.933-.56.933-1.167V6.354c0-.606-.233-.933-.746-.886l-15.177.887c-.56.046-.747.326-.747.933zm14.337.745c.093.42 0 .84-.42.888l-.7.14v10.264c-.608.327-1.168.514-1.635.514-.748 0-.935-.234-1.495-.933l-4.577-7.186v6.952l1.448.327s0 .84-1.168.84l-3.22.186c-.094-.186 0-.653.327-.746l.84-.233V9.854L7.822 9.76c-.094-.42.14-1.026.793-1.073l3.454-.233 4.764 7.279v-6.44l-1.215-.14c-.093-.514.28-.886.747-.933zM2.64 1.782l13.168-.933c1.634-.14 2.055-.047 3.082.7l4.25 2.986c.7.513.933.653.933 1.213v16.378c0 1.026-.373 1.634-1.68 1.726l-15.458.934c-.98.046-1.448-.093-1.962-.747l-3.129-4.06c-.56-.747-.793-1.306-.793-1.96V2.969c0-.826.373-1.12 1.589-1.187z"/>
-  </svg>
+  <img src="/Notion.png" alt="Notion" className="w-full h-full object-contain" />
 );
 
 const LinearIcon = () => (
-  <svg viewBox="0 0 24 24" className="w-6 h-6" fill="currentColor">
-    <path d="M2.5 10.56l10.94 10.94a9.96 9.96 0 01-10.94-10.94zM.06 8.24a12.09 12.09 0 000 .4L15.37 23.94c.13-.02.26-.03.4-.05L.06 8.24zm.36-2.07L16.19 21.94c.21-.08.41-.16.62-.25L.67 5.92c-.09.2-.17.41-.25.62zm.87-1.86L18.04 21.07c.19-.12.38-.25.56-.39L1.68 3.76c-.14.18-.27.37-.39.55zm1.22-1.46l17.43 17.43a9.9 9.9 0 00.79-.79L3.3 2.06c-.26.24-.52.5-.77.79zm1.69-1.34l16.64 16.64c.2-.32.39-.65.56-.99L4.77 2.53a12 12 0 00-.57.98zm1.45-1.11L21.3 16.04c.13-.36.24-.73.34-1.11L6.02 1.31c-.38.1-.75.21-1.11.34zm2.34-.64l14.88 14.88c.05-.4.09-.8.11-1.21L7.19.24c-.4.02-.8.06-1.2.11zm2.57-.29l13.5 13.5c-.04-.5-.1-1-.18-1.5L9.01.29c-.49.08-.99.14-1.49.18z"/>
-  </svg>
+  <img src="/linear-dark-logo.svg" alt="Linear" className="w-full h-full object-contain" />
 );
 
 const SlackIcon = () => (
-  <svg viewBox="0 0 24 24" className="w-6 h-6" fill="currentColor">
-    <path d="M5.042 15.165a2.528 2.528 0 01-2.52 2.523A2.528 2.528 0 010 15.165a2.527 2.527 0 012.522-2.52h2.52v2.52zm1.271 0a2.527 2.527 0 012.521-2.52 2.527 2.527 0 012.521 2.52v6.313A2.528 2.528 0 018.834 24a2.528 2.528 0 01-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 01-2.521-2.52A2.528 2.528 0 018.834 0a2.528 2.528 0 012.521 2.522v2.52H8.834zm0 1.271a2.528 2.528 0 012.521 2.521 2.528 2.528 0 01-2.521 2.521H2.522A2.528 2.528 0 010 8.834a2.528 2.528 0 012.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 012.522-2.521A2.528 2.528 0 0124 8.834a2.528 2.528 0 01-2.522 2.521h-2.522V8.834zm-1.27 0a2.528 2.528 0 01-2.523 2.521 2.527 2.527 0 01-2.52-2.521V2.522A2.527 2.527 0 0115.163 0a2.528 2.528 0 012.523 2.522v6.312zM15.163 18.956a2.528 2.528 0 012.523 2.522A2.528 2.528 0 0115.163 24a2.527 2.527 0 01-2.52-2.522v-2.522h2.52zm0-1.27a2.527 2.527 0 01-2.52-2.523 2.526 2.526 0 012.52-2.52h6.313A2.527 2.527 0 0124 15.163a2.528 2.528 0 01-2.522 2.523h-6.315z"/>
-  </svg>
+  <img src="/Slack.png" alt="Slack" className="w-full h-full object-contain" />
 );
 
 const ConfluenceIcon = () => (
-  <svg viewBox="0 0 24 24" className="w-6 h-6" fill="currentColor">
-    <path d="M1.393 17.74a1.13 1.13 0 00.39 1.543l4.916 3.029a1.125 1.125 0 001.55-.403c1.23-2.085 2.59-2.477 5.093-1.32l4.682 2.168a1.127 1.127 0 001.473-.539l2.333-5.09a1.127 1.127 0 00-.547-1.474l-4.63-2.14c-5.206-2.406-9.373-1.189-12.75 4.226h-.51zM22.606 6.26a1.127 1.127 0 00-.388-1.543L17.3 1.688a1.127 1.127 0 00-1.55.403c-1.23 2.085-2.59 2.477-5.093 1.32L6.02 1.242a1.125 1.125 0 00-1.473.539l-2.334 5.09c-.27.555-.03 1.224.547 1.473l4.63 2.14c5.207 2.406 9.373 1.189 12.75-4.225h2.466z"/>
-  </svg>
+  <img src="/Confluence.png" alt="Confluence" className="w-full h-full object-contain" />
 );
 
 const sources = [
@@ -230,7 +222,7 @@ function SearchDemoSection({ isInView }: { isInView: boolean }) {
   }, [isComplete]);
 
   return (
-    <div className="mb-40 p-8 sm:p-10 lg:p-12 bg-[#f5f3ef] rounded-lg border border-[#e8e4dc]">
+    <div className="p-8 sm:p-10 lg:p-12 bg-[#f5f3ef] rounded-lg border border-[#e8e4dc]">
       {/* Fix #4: Changed items-start to items-center for balanced layout during animation */}
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-12 lg:gap-16">
         {/* Text */}
@@ -538,40 +530,40 @@ function AnimatedAnswerCard({ isInView }: { isInView: boolean }) {
     <motion.div 
       layout
       transition={{ layout: { type: "spring", stiffness: 300, damping: 25 } }}
-      className="p-6 rounded-xl bg-[#0c0c0c] text-white mt-auto overflow-hidden"
+      className="p-4 sm:p-5 md:p-6 rounded-lg sm:rounded-xl bg-[#0c0c0c] text-white mt-auto overflow-hidden"
     >
       {/* Question */}
       <AnimatePresence mode="wait">
         <motion.div
           key={`question-${currentIndex}`}
           layout="position"
-          className="flex items-center gap-2 mb-4 pb-3 border-b border-white/10"
+          className="flex items-center gap-2 mb-3 sm:mb-4 pb-2 sm:pb-3 border-b border-white/10"
           initial={{ opacity: 0, y: -6, filter: "blur(4px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           exit={{ opacity: 0, y: -6, filter: "blur(4px)" }}
           transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
         >
-          <div className="w-6 h-6 rounded-full bg-[#0077ED] flex items-center justify-center flex-shrink-0">
-            <span className="text-xs font-bold">?</span>
+          <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[#0077ED] flex items-center justify-center flex-shrink-0">
+            <span className="text-[10px] sm:text-xs font-bold">?</span>
           </div>
-          <span className="text-sm text-white/60">{current.question}</span>
+          <span className="text-xs sm:text-sm text-white/60 leading-tight">{current.question}</span>
         </motion.div>
       </AnimatePresence>
 
       {/* Answer area */}
-      <motion.div layout="position" className="min-h-[80px]">
+      <motion.div layout="position" className="min-h-[70px] sm:min-h-[80px]">
         <AnimatePresence mode="wait">
           {phase === "thinking" && (
             <motion.div
               layout="position"
-              className="flex items-center gap-3"
+              className="flex items-center gap-2 sm:gap-3"
               initial={{ opacity: 0, filter: "blur(4px)" }}
               animate={{ opacity: 1, filter: "blur(0px)" }}
               exit={{ opacity: 0, filter: "blur(4px)" }}
               transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
             >
-              <KoolLogoMotion size={24} color="#0077ED" />
-              <span className="text-sm text-white/40">Searching 47,832 items...</span>
+              <KoolLogoMotion size={20} color="#0077ED" />
+              <span className="text-xs sm:text-sm text-white/40">Searching 47,832 items...</span>
             </motion.div>
           )}
 
@@ -581,9 +573,9 @@ function AnimatedAnswerCard({ isInView }: { isInView: boolean }) {
               initial={{ opacity: 0, filter: "blur(3px)" }}
               animate={{ opacity: 1, filter: "blur(0px)" }}
               transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
-              className="space-y-4"
+              className="space-y-3 sm:space-y-4"
             >
-              <motion.p layout="position" className="text-white/90 leading-relaxed text-sm">
+              <motion.p layout="position" className="text-white/90 leading-relaxed text-xs sm:text-sm">
                 {displayedAnswer.split(current.highlight).map((part, i, arr) => (
                   <span key={i}>
                     {part}
@@ -594,7 +586,7 @@ function AnimatedAnswerCard({ isInView }: { isInView: boolean }) {
                 ))}
                 {displayedAnswer.length < current.answer.length && (
                   <motion.span
-                    className="inline-block w-0.5 h-4 bg-white/60 ml-0.5 align-middle"
+                    className="inline-block w-0.5 h-3 sm:h-4 bg-white/60 ml-0.5 align-middle"
                     animate={{ opacity: [1, 0] }}
                     transition={{ duration: 0.4, repeat: Infinity, ease: "easeInOut" }}
                   />
@@ -605,16 +597,16 @@ function AnimatedAnswerCard({ isInView }: { isInView: boolean }) {
               {displayedAnswer.length === current.answer.length && (
                 <motion.div
                   layout="position"
-                  className="flex items-center gap-2 flex-wrap"
+                  className="flex items-center gap-1.5 sm:gap-2 flex-wrap"
                   initial={{ opacity: 0, y: 6, filter: "blur(3px)" }}
                   animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                   transition={{ delay: 0.15, duration: 0.35, ease: [0.4, 0, 0.2, 1] }}
                 >
-                  <span className="text-xs text-white/40">Sources:</span>
+                  <span className="text-[10px] sm:text-xs text-white/40">Sources:</span>
                   {current.sources.map((source, i) => (
                     <motion.span
                       key={source}
-                      className="text-xs px-2 py-1 rounded bg-white/10 text-white/70 cursor-pointer hover:text-white hover:bg-white/20 transition-colors"
+                      className="text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 sm:py-1 rounded bg-white/10 text-white/70 cursor-pointer hover:text-white hover:bg-white/20 transition-colors"
                       initial={{ opacity: 0, filter: "blur(2px)" }}
                       animate={{ opacity: 1, filter: "blur(0px)" }}
                       transition={{ delay: 0.25 + i * 0.08, duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
@@ -631,19 +623,18 @@ function AnimatedAnswerCard({ isInView }: { isInView: boolean }) {
       </motion.div>
 
       {/* Progress indicator */}
-      <motion.div layout="position" className="flex gap-1.5 mt-4 pt-3 border-t border-white/5">
+      <motion.div layout="position" className="flex gap-1 sm:gap-1.5 mt-3 sm:mt-4 pt-2 sm:pt-3 border-t border-white/5">
         {answerExamples.map((_, i) => (
-          <div key={i} className="relative flex-1 h-1">
+          <div key={i} className="relative flex-1 h-0.5 sm:h-1">
             {/* Background track */}
             <div className={`absolute inset-0 rounded-full ${i === currentIndex ? "bg-[#0077ED]/20" : "bg-white/10"}`} />
             {/* Progress fill */}
             <motion.div
               key={`${i}-${cycle}`}
-              className="absolute inset-0 rounded-full bg-[#0077ED]"
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: i === currentIndex ? 1 : i < currentIndex ? 1 : 0 }}
+              className="absolute left-0 top-0 bottom-0 rounded-full bg-[#0077ED]"
+              initial={{ width: "0%" }}
+              animate={{ width: i === currentIndex ? "100%" : i < currentIndex ? "100%" : "0%" }}
               transition={{ duration: i === currentIndex ? 8 : 0.3, ease: i === currentIndex ? "linear" : "easeOut" }}
-              style={{ transformOrigin: "left" }}
             />
           </div>
         ))}
@@ -658,7 +649,7 @@ export function Features() {
   const [activeSource, setActiveSource] = useState(0);
 
   return (
-    <section className="py-24 relative bg-[#faf9f7] overflow-hidden" ref={ref}>
+    <section id="product" className="py-24 relative bg-[#faf9f7] overflow-hidden" ref={ref}>
       <Container className="space-y-12">
         {/* Section header */}
         <motion.div 
@@ -667,39 +658,66 @@ export function Features() {
           transition={{ duration: 0.5 }}
         >
           <h2 className="font-display text-[32px] sm:text-[40px] md:text-[48px] text-[#0c0c0c] leading-[1.1] mb-4">
-            Your team knows a lot. <span className="text-[#7a7a7a]">You just can't find it.</span>
+            Your team knows a lot.{" "}
+            <span className="inline-block h-[40px] sm:h-[50px] md:h-[60px] w-[280px] sm:w-[360px] md:w-[450px] align-middle">
+              <VaporizeTextCycle
+                texts={["You just can't find it."]}
+                font={{
+                  fontFamily: "PP Mori, system-ui, sans-serif",
+                  fontSize: "48px",
+                  fontWeight: 400,
+                }}
+                color="rgb(122, 122, 122)"
+                spread={3}
+                density={6}
+                animation={{
+                  vaporizeDuration: 2.5,
+                  fadeInDuration: 0.8,
+                  waitDuration: 2,
+                }}
+                direction="left-to-right"
+                alignment="left"
+                tag={Tag.P}
+                loop={false}
+              />
+            </span>
           </h2>
           <p className="text-lg text-[#4a4a4a] leading-relaxed">
             The answer exists somewhere—buried in a PR, a Notion page, a Slack thread from three months ago. Kool brings it all together.
           </p>
         </motion.div>
 
-        {/* Features 1 & 3: Side by side cards */}
-        <div className="grid md:grid-cols-2 gap-6">
+        {/* Features section wrapper */}
+        <div className="space-y-4 sm:space-y-6">
+          {/* Feature 1: Natural language search */}
+          <SearchDemoSection isInView={isInView} />
+
+          {/* Features 2 & 3: Side by side cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
           {/* Card 1: Reads everything */}
           <motion.div
-            className="p-8 rounded-lg bg-[#f5f3ef] border border-[#e8e4dc]"
+            className="p-4 sm:p-6 md:p-8 rounded-lg bg-[#f5f3ef] border border-[#e8e4dc]"
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
           >
             {/* Header */}
-            <div className="mb-6">
-              <h3 className="font-display text-xl text-[#0c0c0c] mb-1">Reads everything. Forgets nothing.</h3>
-              <p className="text-sm text-[#4a4a4a] leading-relaxed">
+            <div className="mb-4 sm:mb-6">
+              <h3 className="font-display text-lg sm:text-xl text-[#0c0c0c] mb-1">Reads everything. Forgets nothing.</h3>
+              <p className="text-xs sm:text-sm text-[#4a4a4a] leading-relaxed">
                 PRs, tickets, docs, Slack threads—Kool indexes it all in real-time.
               </p>
             </div>
 
             {/* Visual: Connection sources */}
-            <div className="relative p-6 rounded-xl bg-white border border-[#0c0c0c]/5">
+            <div className="relative p-3 sm:p-4 md:p-6 rounded-lg sm:rounded-xl bg-white border border-[#0c0c0c]/5">
               {/* Source icons row */}
-              <div className="flex items-center justify-center gap-3 mb-6">
+              <div className="flex items-center justify-start gap-2 sm:gap-3 mb-4 sm:mb-6 flex-wrap">
                 {sources.slice(0, 5).map((source, i) => (
                   <motion.button
                     key={source.name}
                     onClick={() => setActiveSource(i)}
-                    className={`relative w-10 h-10 rounded-lg flex items-center justify-center transition-all ${
+                    className={`relative w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center transition-all ${
                       activeSource === i 
                         ? "bg-[#0c0c0c] text-white scale-110 shadow-md" 
                         : source.connected 
@@ -709,18 +727,18 @@ export function Features() {
                     whileHover={{ y: -2 }}
                     whileTap={{ scale: 0.95 }}
                   >
-                    <div className="w-5 h-5">
+                    <div className="w-4 h-4 sm:w-5 sm:h-5">
                       <source.icon />
                     </div>
                     {source.connected && (
-                      <div className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-[#34d399] border-2 border-white" />
+                      <div className="absolute -top-0.5 -right-0.5 sm:-top-1 sm:-right-1 w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#34d399] border-2 border-white" />
                     )}
                   </motion.button>
                 ))}
               </div>
 
               {/* Live feed */}
-              <div className="space-y-2">
+              <div className="space-y-1.5 sm:space-y-2">
                 {[
                   { time: "now", text: "PR #847 merged → main", source: "GitHub" },
                   { time: "2m", text: "Auth docs updated", source: "Notion" },
@@ -728,36 +746,36 @@ export function Features() {
                 ].map((item, i) => (
                   <motion.div
                     key={i}
-                    className="flex items-center gap-3 p-2.5 rounded-lg bg-[#f7f5f0]"
+                    className="flex items-center gap-2 sm:gap-3 p-2 sm:p-2.5 rounded-lg bg-[#f7f5f0]"
                     initial={{ opacity: 0, x: -20 }}
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
                     transition={{ delay: 0.3 + i * 0.1 }}
                   >
-                    <span className="text-xs text-[#7a7a7a] w-7">{item.time}</span>
-                    <span className="flex-1 text-sm text-[#4a4a4a]">{item.text}</span>
-                    <span className="text-xs px-2 py-0.5 rounded bg-white text-[#7a7a7a]">{item.source}</span>
+                    <span className="text-[10px] sm:text-xs text-[#7a7a7a] w-6 sm:w-7 shrink-0">{item.time}</span>
+                    <span className="flex-1 text-xs sm:text-sm text-[#4a4a4a] truncate">{item.text}</span>
+                    <span className="text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 rounded bg-white text-[#7a7a7a] shrink-0">{item.source}</span>
                   </motion.div>
                 ))}
               </div>
               
-              <div className="mt-4 pt-3 border-t border-[#0c0c0c]/5 flex items-center justify-between">
-                <span className="text-xs text-[#7a7a7a]">47,832 items indexed</span>
-                <span className="text-xs text-[#34d399]">● Live sync</span>
+              <div className="mt-3 sm:mt-4 pt-2 sm:pt-3 border-t border-[#0c0c0c]/5 flex items-center justify-between">
+                <span className="text-[10px] sm:text-xs text-[#7a7a7a]">47,832 items indexed</span>
+                <span className="text-[10px] sm:text-xs text-[#34d399]">● Live sync</span>
               </div>
             </div>
           </motion.div>
 
           {/* Card 2: Answers with receipts */}
           <motion.div
-            className="p-8 rounded-lg bg-[#f5f3ef] border border-[#e8e4dc] flex flex-col justify-between"
+            className="p-4 sm:p-6 md:p-8 rounded-lg bg-[#f5f3ef] border border-[#e8e4dc] flex flex-col justify-between"
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
             {/* Header */}
-            <div className="mb-6">
-              <h3 className="font-display text-xl text-[#0c0c0c] mb-1">Answers with receipts.</h3>
-              <p className="text-sm text-[#4a4a4a] leading-relaxed">
+            <div className="mb-4 sm:mb-6">
+              <h3 className="font-display text-lg sm:text-xl text-[#0c0c0c] mb-1">Answers with receipts.</h3>
+              <p className="text-xs sm:text-sm text-[#4a4a4a] leading-relaxed">
                 Every answer links back to the PR, ticket, or Slack thread it came from.
               </p>
             </div>
@@ -765,10 +783,8 @@ export function Features() {
             {/* Visual: Animated Answer card */}
             <AnimatedAnswerCard isInView={isInView} />
           </motion.div>
+          </div>
         </div>
-
-        {/* Feature 2: Natural language search */}
-        <SearchDemoSection isInView={isInView} />
       </Container>
     </section>
   );

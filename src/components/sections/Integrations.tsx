@@ -24,27 +24,19 @@ const JiraLogo = () => (
 );
 
 const LinearLogo = () => (
-  <svg viewBox="0 0 24 24" className="w-6 h-6" fill="currentColor">
-    <path d="M2.513 12.833c.115.164.298.338.47.512l7.672 7.672c.174.173.348.355.512.47a5.138 5.138 0 007.319-7.032L11.545 7.51c-.173-.174-.347-.356-.511-.47a5.138 5.138 0 00-8.521 5.793zm.97-4.478a3.862 3.862 0 016.32 1.306L3.177 16.29a3.862 3.862 0 01.306-7.935zm4.478 12.162a3.862 3.862 0 01-1.306-6.32l6.626-6.626a3.862 3.862 0 015.306 5.306l-6.626 6.626a3.862 3.862 0 01-4 1.014z"/>
-  </svg>
+  <img src="/linear-light-logo.svg" alt="Linear" className="w-6 h-6 object-contain" />
 );
 
 const NotionLogo = () => (
-  <svg viewBox="0 0 24 24" className="w-6 h-6" fill="currentColor">
-    <path d="M4.459 4.208c.746.606 1.026.56 2.428.466l13.215-.793c.28 0 .047-.28-.046-.326L17.86 1.968c-.42-.326-.98-.7-2.055-.607L3.01 2.295c-.466.046-.56.28-.374.466zm.793 3.08v13.904c0 .747.373 1.027 1.214.98l14.523-.84c.841-.046.935-.56.935-1.166V6.354c0-.606-.233-.933-.748-.887l-15.177.887c-.56.047-.747.327-.747.933zm14.337.745c.093.42 0 .84-.42.888l-.7.14v10.264c-.608.327-1.168.514-1.635.514-.748 0-.935-.234-1.495-.933l-4.577-7.186v6.952l1.448.327s0 .84-1.168.84l-3.22.186c-.094-.186 0-.653.327-.746l.84-.233V9.854L7.822 9.76c-.094-.42.14-1.026.793-1.073l3.456-.233 4.764 7.279v-6.44l-1.215-.14c-.093-.514.28-.887.747-.933zM2.718 1.321l13.496-.933c1.635-.14 2.055-.047 3.082.7l4.249 2.986c.7.513.933.653.933 1.213v16.378c0 1.026-.373 1.634-1.68 1.726l-15.458.934c-.98.047-1.448-.093-1.962-.747l-3.129-4.06c-.56-.747-.793-1.306-.793-1.96V2.948c0-.839.374-1.54 1.262-1.626z"/>
-  </svg>
+  <img src="/Notion.png" alt="Notion" className="w-6 h-6 object-contain" />
 );
 
 const ConfluenceLogo = () => (
-  <svg viewBox="0 0 24 24" className="w-6 h-6" fill="currentColor">
-    <path d="M1.393 18.828c-.191.312-.404.678-.604 1.019a.984.984 0 00.346 1.345l3.949 2.428a.978.978 0 001.343-.244c.173-.27.392-.6.64-.96 1.57-2.295 3.135-2.018 5.986-.837l3.703 1.528a.984.984 0 001.238-.479l2.02-4.158a.982.982 0 00-.478-1.307l-3.634-1.503c-4.962-2.05-8.748-1.523-12.509 3.168zm21.214-13.655c.191-.312.404-.678.604-1.02a.984.984 0 00-.346-1.344L18.916.38a.978.978 0 00-1.343.244c-.173.271-.392.6-.64.96-1.57 2.296-3.135 2.019-5.986.838L7.244.893a.984.984 0 00-1.238.479L3.986 5.53a.982.982 0 00.478 1.307l3.634 1.502c4.962 2.05 8.748 1.524 12.509-3.166z"/>
-  </svg>
+  <img src="/Confluence.png" alt="Confluence" className="w-6 h-6 object-contain" />
 );
 
 const SlackLogo = () => (
-  <svg viewBox="0 0 24 24" className="w-6 h-6" fill="currentColor">
-    <path d="M5.042 15.165a2.528 2.528 0 01-2.52 2.523A2.528 2.528 0 010 15.165a2.527 2.527 0 012.522-2.52h2.52v2.52zm1.271 0a2.527 2.527 0 012.521-2.52 2.527 2.527 0 012.521 2.52v6.313A2.528 2.528 0 018.834 24a2.528 2.528 0 01-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 01-2.521-2.52A2.528 2.528 0 018.834 0a2.528 2.528 0 012.521 2.522v2.52H8.834zm0 1.271a2.528 2.528 0 012.521 2.521 2.528 2.528 0 01-2.521 2.521H2.522A2.528 2.528 0 010 8.834a2.528 2.528 0 012.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 012.522-2.521A2.528 2.528 0 0124 8.834a2.528 2.528 0 01-2.522 2.521h-2.522V8.834zm-1.27 0a2.528 2.528 0 01-2.523 2.521 2.527 2.527 0 01-2.52-2.521V2.522A2.527 2.527 0 0115.163 0a2.528 2.528 0 012.523 2.522v6.312zM15.163 18.956a2.528 2.528 0 012.523 2.522A2.528 2.528 0 0115.163 24a2.527 2.527 0 01-2.52-2.522v-2.522h2.52zm0-1.27a2.527 2.527 0 01-2.52-2.523 2.526 2.526 0 012.52-2.52h6.315A2.528 2.528 0 0124 15.163a2.528 2.528 0 01-2.522 2.523h-6.315z"/>
-  </svg>
+  <img src="/Slack.png" alt="Slack" className="w-6 h-6 object-contain" />
 );
 
 const DiscordLogo = () => (
@@ -54,9 +46,7 @@ const DiscordLogo = () => (
 );
 
 const FigmaLogo = () => (
-  <svg viewBox="0 0 24 24" className="w-6 h-6" fill="currentColor">
-    <path d="M15.852 8.981h-4.588V0h4.588c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.491-4.49 4.491zM12.735 7.51h3.117c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-3.117V7.51zm0 1.471H8.148c-2.476 0-4.49-2.014-4.49-4.49S5.672 0 8.148 0h4.588v8.981zm-4.587-7.51c-1.665 0-3.019 1.355-3.019 3.019s1.354 3.02 3.019 3.02h3.117V1.471H8.148zm4.587 15.019H8.148c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h4.588v8.98zM8.148 8.981c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h3.117V8.981H8.148zM8.172 24c-2.489 0-4.515-2.014-4.515-4.49s2.014-4.49 4.49-4.49h4.588v4.441c0 2.503-2.047 4.539-4.563 4.539zm-.024-7.51a3.023 3.023 0 00-3.019 3.019c0 1.665 1.365 3.019 3.044 3.019 1.705 0 3.093-1.376 3.093-3.068v-2.97H8.148zm7.704 0h-.098c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h.098c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.49-4.49 4.49zm-.097-7.509c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h.098c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-.098z"/>
-  </svg>
+  <img src="/Figma-logo.svg" alt="Figma" className="w-6 h-6 object-contain" />
 );
 
 const AsanaLogo = () => (
@@ -65,57 +55,168 @@ const AsanaLogo = () => (
   </svg>
 );
 
-// Integration data with colors
+const TrelloLogo = () => (
+  <svg viewBox="0 0 24 24" className="w-6 h-6" fill="currentColor">
+    <path d="M21 0H3C1.343 0 0 1.343 0 3v18c0 1.656 1.343 3 3 3h18c1.656 0 3-1.344 3-3V3c0-1.657-1.344-3-3-3zM10.44 18.18c0 .795-.645 1.44-1.44 1.44H4.56c-.795 0-1.44-.645-1.44-1.44V4.56c0-.795.645-1.44 1.44-1.44H9c.795 0 1.44.645 1.44 1.44v13.62zm10.44-6c0 .794-.645 1.44-1.44 1.44H15c-.795 0-1.44-.646-1.44-1.44V4.56c0-.795.645-1.44 1.44-1.44h4.44c.795 0 1.44.645 1.44 1.44v7.62z"/>
+  </svg>
+);
+
+const DropboxLogo = () => (
+  <svg viewBox="0 0 24 24" className="w-6 h-6" fill="currentColor">
+    <path d="M6 1.807L0 5.629l6 3.822 6-3.822zM18 1.807l-6 3.822 6 3.822 6-3.822zM0 13.274l6 3.822 6-3.822-6-3.822zM18 9.452l-6 3.822 6 3.822 6-3.822zM6 18.371l6 3.822 6-3.822-6-3.822z"/>
+  </svg>
+);
+
+const ZoomLogo = () => (
+  <svg viewBox="0 0 24 24" className="w-6 h-6" fill="currentColor">
+    <path d="M24 12c0 6.627-5.373 12-12 12S0 18.627 0 12 5.373 0 12 0s12 5.373 12 12zm-8.031-3.017c-.315-.003-.626.08-.897.24l-1.074.637v4.28l1.074.637c.271.16.582.243.897.24 1.188 0 1.969-.963 1.969-2.517v-.999c0-1.555-.78-2.518-1.969-2.518zM5.654 9.136c-.103 0-.187.084-.187.187v3.942c0 .931.756 1.687 1.688 1.687h4.156c.103 0 .187-.084.187-.188v-.749c0-.103-.084-.187-.187-.187H7.343c-.207 0-.375-.168-.375-.375v-4.13c0-.103-.084-.187-.188-.187z"/>
+  </svg>
+);
+
+const MiroLogo = () => (
+  <svg viewBox="0 0 24 24" className="w-6 h-6" fill="currentColor">
+    <path d="M17.392 0H13.9L17 4.808 10.444 0H6.949l3.102 6.3L3.494 0H0l3.05 8.131L0 24h3.494L10.05 6.985 6.949 24h3.495L17 5.494 13.899 24h3.493L24 3.672 17.392 0z"/>
+  </svg>
+);
+
+const VSCodeLogo = () => (
+  <svg viewBox="0 0 24 24" className="w-6 h-6" fill="currentColor">
+    <path d="M23.15 2.587L18.21.21a1.494 1.494 0 0 0-1.705.29l-9.46 8.63-4.12-3.128a.999.999 0 0 0-1.276.057L.327 7.261A1 1 0 0 0 .326 8.74L3.899 12 .326 15.26a1 1 0 0 0 .001 1.479L1.65 17.94a.999.999 0 0 0 1.276.057l4.12-3.128 9.46 8.63a1.492 1.492 0 0 0 1.704.29l4.942-2.377A1.5 1.5 0 0 0 24 20.06V3.939a1.5 1.5 0 0 0-.85-1.352zm-5.146 14.861L10.826 12l7.178-5.448v10.896z"/>
+  </svg>
+);
+
+const GoogleDriveLogo = () => (
+  <svg viewBox="0 0 24 24" className="w-6 h-6" fill="currentColor">
+    <path d="M7.71 3.5L1.15 15l3.43 5.93L11.14 9.5 7.71 3.5m2.86 0l6.57 11.43H24L17.43 3.5H10.57M16 14.93l-3.43 5.93H20.57L24 14.93H16"/>
+  </svg>
+);
+
+const LoomLogo = () => (
+  <svg viewBox="0 0 24 24" className="w-6 h-6" fill="currentColor">
+    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.568 14.319l-3.465-2.001 3.465-2.001a1.335 1.335 0 0 0 0-2.313l-6.236-3.601a1.335 1.335 0 0 0-2.003 1.156v4.003l-3.465-2.001a1.335 1.335 0 0 0-2.003 1.157v4.562a1.335 1.335 0 0 0 2.003 1.156l3.465-2.001v4.003a1.335 1.335 0 0 0 2.003 1.156l6.236-3.601a1.335 1.335 0 0 0 0-2.313z"/>
+  </svg>
+);
+
+// Integration data with colors - reduced set for cleaner globe (2 per orbit)
 const integrations = [
   { name: "GitHub", Logo: GitHubLogo, color: "#ffffff" },
-  { name: "GitLab", Logo: GitLabLogo, color: "#FC6D26" },
-  { name: "Jira", Logo: JiraLogo, color: "#0052CC" },
-  { name: "Linear", Logo: LinearLogo, color: "#5E6AD2" },
-  { name: "Notion", Logo: NotionLogo, color: "#ffffff" },
-  { name: "Confluence", Logo: ConfluenceLogo, color: "#0052CC" },
   { name: "Slack", Logo: SlackLogo, color: "#E01E5A" },
-  { name: "Discord", Logo: DiscordLogo, color: "#5865F2" },
+  { name: "Notion", Logo: NotionLogo, color: "#ffffff" },
+  { name: "Linear", Logo: LinearLogo, color: "#5E6AD2" },
+  { name: "Jira", Logo: JiraLogo, color: "#0052CC" },
   { name: "Figma", Logo: FigmaLogo, color: "#F24E1E" },
-  { name: "Asana", Logo: AsanaLogo, color: "#F06A6A" },
+  { name: "GitLab", Logo: GitLabLogo, color: "#FC6D26" },
+  { name: "Confluence", Logo: ConfluenceLogo, color: "#0052CC" },
+  { name: "Discord", Logo: DiscordLogo, color: "#5865F2" },
+  { name: "VS Code", Logo: VSCodeLogo, color: "#007ACC" },
+];
+
+// All integrations for the text list
+const allIntegrations = [
+  "GitHub", "GitLab", "Jira", "Linear", "Notion", "Confluence", 
+  "Slack", "Discord", "Figma", "Asana", "Trello", "Dropbox", 
+  "Zoom", "Miro", "VS Code", "Google Drive", "Loom"
 ];
 
 // Globe component with orbiting logos
 function OrbitingGlobe() {
-  // Each logo gets its own orbit configuration
+  // Each logo gets its own orbit configuration - 2 icons per ring, 180° apart for clean spacing
   const logoConfigs = [
-    { lat: 0, startAngle: 0, duration: 18, direction: 1 },      // GitHub - equator
-    { lat: 0, startAngle: 180, duration: 18, direction: 1 },    // GitLab - equator opposite
-    { lat: -30, startAngle: 60, duration: 22, direction: -1 },  // Jira - upper
-    { lat: -30, startAngle: 240, duration: 22, direction: -1 }, // Linear - upper opposite
-    { lat: 30, startAngle: 120, duration: 20, direction: 1 },   // Notion - lower
-    { lat: 30, startAngle: 300, duration: 20, direction: 1 },   // Confluence - lower opposite
-    { lat: -55, startAngle: 30, duration: 26, direction: -1 },  // Slack - top
-    { lat: -55, startAngle: 210, duration: 26, direction: -1 }, // Discord - top opposite
-    { lat: 55, startAngle: 150, duration: 24, direction: 1 },   // Figma - bottom
-    { lat: 55, startAngle: 330, duration: 24, direction: 1 },   // Asana - bottom opposite
+    // Equator ring (lat: 0) - 2 icons
+    { lat: 0, startAngle: 0, duration: 40, direction: 1 },
+    { lat: 0, startAngle: 180, duration: 40, direction: 1 },
+    // Upper ring (lat: -30) - 2 icons
+    { lat: -30, startAngle: 90, duration: 45, direction: -1 },
+    { lat: -30, startAngle: 270, duration: 45, direction: -1 },
+    // Lower ring (lat: 30) - 2 icons
+    { lat: 30, startAngle: 45, duration: 42, direction: 1 },
+    { lat: 30, startAngle: 225, duration: 42, direction: 1 },
+    // Top ring (lat: -55) - 2 icons
+    { lat: -55, startAngle: 135, duration: 50, direction: -1 },
+    { lat: -55, startAngle: 315, duration: 50, direction: -1 },
+    // Bottom ring (lat: 55) - 2 icons
+    { lat: 55, startAngle: 20, duration: 48, direction: 1 },
+    { lat: 55, startAngle: 200, duration: 48, direction: 1 },
   ];
 
   const globeRadius = 190;
 
   return (
     <div className="relative w-[520px] h-[520px] mx-auto" style={{ perspective: "1000px" }}>
-      {/* Dynamic keyframes for each logo - orbit and counter-rotation */}
+      {/* Dynamic keyframes for each logo - orbit and counter-rotation with visibility */}
       <style>{`
         ${logoConfigs.map((config, i) => {
           const latRad = config.lat * Math.PI / 180;
           const orbitRadius = Math.round(globeRadius * Math.cos(latRad) * 100) / 100;
-          const yPos = Math.round(globeRadius * Math.sin(latRad) * 0.92 * 100) / 100; // slight compression for perspective
+          const yPos = Math.round(globeRadius * Math.sin(latRad) * 0.92 * 100) / 100;
           const dir = config.direction;
-          const endAngle = config.startAngle + (360 * dir);
           
+          // Helper functions for visibility calculation
+          const norm = (a: number) => ((a % 360) + 360) % 360;
+          const isVisible = (angle: number) => {
+            const n = norm(angle);
+            return n < 90 || n > 270;
+          };
+          
+          // Calculate percentage to reach a target angle
+          const pAtAngle = (target: number) => {
+            let diff = target - config.startAngle;
+            if (dir > 0) {
+              while (diff < 0) diff += 360;
+              while (diff >= 360) diff -= 360;
+            } else {
+              while (diff > 0) diff -= 360;
+              while (diff <= -360) diff += 360;
+              diff = -diff;
+            }
+            return Math.round((diff / 360) * 1000) / 10;
+          };
+          
+          const angleAtP = (p: number) => config.startAngle + dir * 360 * p / 100;
+          
+          const p90 = pAtAngle(90);
+          const p270 = pAtAngle(270);
+          const startVisible = isVisible(config.startAngle);
+          const epsilon = 0.5;
+          
+          // Build keyframe stops
+          type Stop = { p: number; angle: number; opacity: number };
+          const stops: Stop[] = [];
+          
+          // Start
+          stops.push({ p: 0, angle: config.startAngle, opacity: startVisible ? 1 : 0 });
+          
+          // Add transition points
+          const transitions = [p90, p270].sort((a, b) => a - b);
+          transitions.forEach(tp => {
+            if (tp > epsilon && tp < 100 - epsilon) {
+              const beforeAngle = angleAtP(tp - epsilon);
+              const afterAngle = angleAtP(tp + epsilon);
+              const beforeOpacity = isVisible(beforeAngle) ? 1 : 0;
+              const afterOpacity = isVisible(afterAngle) ? 1 : 0;
+              if (beforeOpacity !== afterOpacity) {
+                stops.push({ p: Math.round((tp - epsilon) * 10) / 10, angle: beforeAngle, opacity: beforeOpacity });
+                stops.push({ p: Math.round((tp + epsilon) * 10) / 10, angle: afterAngle, opacity: afterOpacity });
+              }
+            }
+          });
+          
+          // End
+          const endAngle = config.startAngle + dir * 360;
+          stops.push({ p: 100, angle: endAngle, opacity: startVisible ? 1 : 0 });
+          
+          // Sort by percentage
+          stops.sort((a, b) => a.p - b.p);
+          
+          // Generate keyframe CSS - with counter-rotation to keep icons facing camera
           return `
             @keyframes orbit${i} {
-              0% { 
-                transform: rotateX(18deg) translateY(${yPos}px) rotateY(${config.startAngle}deg) translateZ(${orbitRadius}px) rotateY(${-config.startAngle}deg) rotateX(-18deg);
-              }
-              100% { 
-                transform: rotateX(18deg) translateY(${yPos}px) rotateY(${endAngle}deg) translateZ(${orbitRadius}px) rotateY(${-endAngle}deg) rotateX(-18deg);
-              }
+              ${stops.map(s => {
+                return `${s.p}% { 
+                transform: rotateX(18deg) translateY(${yPos}px) rotateY(${s.angle}deg) translateZ(${orbitRadius}px) rotateY(${-s.angle}deg) rotateX(-18deg);
+                opacity: ${s.opacity};
+              }`;
+              }).join('\n              ')}
             }
           `;
         }).join('\n')}
@@ -193,7 +294,7 @@ function OrbitingGlobe() {
         const config = logoConfigs[i];
         return (
           <div
-            key={integration.name}
+            key={`${integration.name}-${i}`}
             className="orbit-container"
             style={{
               animation: `orbit${i} ${config.duration}s linear infinite`,
@@ -201,10 +302,11 @@ function OrbitingGlobe() {
           >
             <div className="logo-card-wrapper">
               <div 
-                className="w-[52px] h-[52px] rounded-xl flex items-center justify-center"
+                className="w-[52px] h-[52px] flex items-center justify-center"
                 style={{ 
                   backgroundColor: "#131313",
-                  border: `1.5px solid ${integration.color}`,
+                  border: "1px solid #2a2a2a",
+                  borderRadius: "9999px",
                   color: integration.color,
                 }}
               >
@@ -223,46 +325,46 @@ export function Integrations() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="py-24 bg-[#0c0c0c] relative overflow-hidden" id="integrations" ref={ref}>
+    <section className="py-16 sm:py-20 md:py-24 bg-[#0c0c0c] relative overflow-hidden" id="integrations" ref={ref}>
       <Container>
         <motion.div
           className="text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
         >
-          <h2 className="font-display text-3xl sm:text-4xl text-white mb-4">
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-white mb-3 sm:mb-4">
             Connects in 60 seconds
           </h2>
-          <p className="text-white/50 mb-12">OAuth. No tokens. No config files.</p>
+          <p className="text-sm sm:text-base text-white/50 mb-8 sm:mb-12">OAuth. No tokens. No config files.</p>
           
-          {/* Orbiting Globe */}
+          {/* Orbiting Globe - responsive scale */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-16"
+            className="mb-10 sm:mb-12 md:mb-16 scale-[0.55] sm:scale-75 md:scale-90 lg:scale-100 origin-center -my-16 sm:-my-12 md:-my-6 lg:my-0"
           >
             <OrbitingGlobe />
           </motion.div>
           
-          {/* Integration logos as text - minimal */}
-          <div className="flex flex-wrap justify-center items-center gap-x-8 gap-y-4">
-            {integrations.map((integration, i) => (
+          {/* Integration logos as text - all integrations */}
+          <div className="flex flex-wrap justify-center items-center gap-x-4 sm:gap-x-6 md:gap-x-8 gap-y-3 sm:gap-y-4">
+            {allIntegrations.map((name, i) => (
               <motion.span
-                key={integration.name}
-                className="text-lg font-medium text-white/30 hover:text-white/70 transition-colors cursor-default"
+                key={name}
+                className="text-sm sm:text-base md:text-lg font-medium text-white/30 hover:text-white/70 transition-colors cursor-default"
                 initial={{ opacity: 0 }}
                 animate={isInView ? { opacity: 1 } : {}}
-                transition={{ delay: i * 0.05 }}
+                transition={{ delay: i * 0.03 }}
               >
-                {integration.name}
+                {name}
               </motion.span>
             ))}
             <motion.span
-              className="text-lg font-medium text-white/50"
+              className="text-sm sm:text-base md:text-lg font-medium text-white/50"
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : {}}
-              transition={{ delay: 0.4 }}
+              transition={{ delay: 0.5 }}
             >
               + more
             </motion.span>
